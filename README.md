@@ -8,16 +8,22 @@ This integrates into Docker Engine to automatically configure your containers fo
 
 ### Update yum repos
 ```
+
+# get repo list 
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.repo | \
   sudo tee /etc/yum.repos.d/nvidia-docker.repo
+  
+# For pre-releases, you need to enable the experimental repos of all dependencies:
 sudo yum-config-manager --enable libnvidia-container-experimental
 sudo yum-config-manager --enable nvidia-container-runtime-experimental
+
+# To later disable the experimental repos of all dependencies, you can run:
 sudo yum-config-manager --disable libnvidia-container-experimental
 sudo yum-config-manager --disable nvidia-container-runtime-experimental
 ```
 
-### install docker repo 
+### install nvidia container toolkit 
 `yum install -y nvidia-docker2`
 
 ### restart docker
